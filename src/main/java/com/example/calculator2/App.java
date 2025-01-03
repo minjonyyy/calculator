@@ -1,5 +1,6 @@
 package com.example.calculator2;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class App {
@@ -8,6 +9,7 @@ public class App {
         Calculator calculator = new Calculator(); //Calculator 인스턴스 생성
 
         String stop="";
+        String yesorno="";
 
         do {
             System.out.print("첫 번째 숫자를 입력하세요: ");
@@ -28,6 +30,16 @@ public class App {
             }
 
             System.out.println("계산된 결과들:" + calculator.getResults().toString());
+
+            System.out.println("가장 먼저 저장된 데이터 삭제? 네/아니오");
+            yesorno = sc.nextLine();
+
+            if (Objects.equals(yesorno, "네")){
+                calculator.removeResult();
+                System.out.println("삭제 후 계산된 결과들: "+ calculator.getResults().toString());
+            } else if (Objects.equals(yesorno, "아니오")) {
+                System.out.println("결과들 그대로" + calculator.getResults().toString());
+            }
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             stop= sc.nextLine();

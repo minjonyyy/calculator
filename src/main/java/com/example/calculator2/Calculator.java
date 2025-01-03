@@ -44,11 +44,11 @@ public class Calculator {
     public List<Integer> getResults() {
         return results;
     }
+
     //setter 메서드
     public void setResults(List<Integer> results) {
         this.results = results;
     }
-
 
     public void removeResult() {
         results.remove(0);
