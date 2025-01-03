@@ -27,14 +27,14 @@ public class Calculator {
             case '/':
                 if (num2 == 0) {
                     System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                    return 0;
+                    return -1;
                 } else {
                     result = num1 / num2;
                 }
                 break;
             default:
                 System.out.println("잘못된 연산 기호입니다. (+, -, *, / 중 하나를 입력하세요)");
-                return 0;
+                return -1;
         }
         results.add(result);
         return result;
@@ -47,6 +47,11 @@ public class Calculator {
     //setter 메서드
     public void setResults(List<Integer> results) {
         this.results = results;
+    }
+
+
+    public void removeResult() {
+        results.remove(0);
     }
 
 

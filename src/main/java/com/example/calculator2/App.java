@@ -23,14 +23,11 @@ public class App {
 
             int result = calculator.calculate(num1, num2, op);
 
-            if (result != 0) {
+            if (result != -1) {
                 System.out.println("결과: " + num1 + " " + op + " " + num2 + " = " + result);
             }
 
-            System.out.println("계산된 결과들:");
-            for (int res : calculator.getResults()) {
-                System.out.println(res);
-            }
+            System.out.println("계산된 결과들:" + calculator.getResults().toString());
 
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             stop= sc.nextLine();
