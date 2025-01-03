@@ -1,6 +1,5 @@
 package com.example.calculator2;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +39,15 @@ public class Calculator {
         results.add(result);
         return result;
     }
-
+    
+    //getter 메서드
     public List<Integer> getResults() {
         return results;
     }
+    //setter 메서드
+    public void setResults(List<Integer> results) {
+        this.results = results;
+    }
+
 
 }
