@@ -14,6 +14,11 @@ public class Calculator {
     public int calculate(int num1, int num2, char op) {
         int result = 0;
 
+        if (num1 <0 || num2<0){
+            System.out.println("양의 정수(0포함)를 입력해주세요");
+            return -1;
+        }
+
         switch (op) {
             case '+':
                 result = num1 + num2;
