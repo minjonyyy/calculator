@@ -6,7 +6,8 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Calculator calculator = new Calculator(); //Calculator 인스턴스 생성
+
+        ArithmeticCalculator arithmeticCalculator = new ArithmeticCalculator();
 
         String stop="";
         String yesorno="";
@@ -23,24 +24,30 @@ public class App {
             char op = sc.next().charAt(0);
             sc.nextLine();
 
-            int result = calculator.calculate(num1, num2, op);
+            Calculator.OperatorType operator = getOperatorType(op);
+            if (operator == null) {
+                System.out.println("잘못된 연산 기호입니다.");
+                continue;  // 잘못된 기호일 경우 다시 입력 받기
+            }
+
+            int result = arithmeticCalculator.calculate(num1, num2, operator);
 
             if (result != -1) {
                 System.out.println("결과: " + num1 + " " + op + " " + num2 + " = " + result);
 
-                System.out.println("계산된 결과들:" + calculator.getResults().toString());
+                System.out.println("계산된 결과들:" + arithmeticCalculator.getResults().toString());
 
             }
 
-            if (!calculator.getResults().isEmpty()){
+            if (!arithmeticCalculator.getResults().isEmpty()){
                 System.out.println("가장 먼저 저장된 데이터 삭제? ('네' 입력 시 삭제)");
                 yesorno = sc.nextLine();
 
                 if (Objects.equals(yesorno, "네")){
-                    calculator.removeResult();
-                    System.out.println("삭제 후 계산된 결과들: "+ calculator.getResults().toString());
+                    arithmeticCalculator.removeResult();
+                    System.out.println("삭제 후 계산된 결과들: "+ arithmeticCalculator.getResults().toString());
                 } else {
-                    System.out.println("결과들 그대로" + calculator.getResults().toString());
+                    System.out.println("결과들 그대로" + arithmeticCalculator.getResults().toString());
                 }
             }
 
@@ -49,6 +56,15 @@ public class App {
 
         } while(!stop.equals("exit"));
 
+    }
 
+    // char를 OperatorType으로 변환하는 메서드
+    private static Calculator.OperatorType getOperatorType(char op) {
+        for (Calculator.OperatorType operatorType : Calculator.OperatorType.values()) {
+            if (operatorType.getOperator() == op) {
+                return operatorType;
+            }
+        }
+        return null;
     }
 }
