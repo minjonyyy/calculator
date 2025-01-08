@@ -3,31 +3,38 @@ package com.example.calculator3;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArithmeticCalculator {
+public class ArithmeticCalculator<T extends Number> {
 
-    private List<Integer> results;
+    private List<T> results;
+    private final Class<T> type;
 
-    public ArithmeticCalculator() {
+    // 생성자를 통해 타입 정보를 전달받음
+    public ArithmeticCalculator(Class<T> type) {
         this.results = new ArrayList<>();
+        this.type = type;
     }
 
-    public enum OperatorType{
+    public enum OperatorType {
         PLUS('+'), MINUS('-'), MULTIPLY('*'), DIVIDE('/');
 
         private final char operator;
-        OperatorType(char operator) {this.operator = operator;}
+
+        OperatorType(char operator) {
+            this.operator = operator;
+        }
 
         public char getOperator() {
             return operator;
         }
     }
 
-    public int calculate(int num1, int num2, ArithmeticCalculator.OperatorType operator) {
-        int result = 0;
+    public T calculate(double num1, double num2, OperatorType operator) {
+        double result;
 
-        if (num1 <0 || num2<0){
-            System.out.println("양의 정수(0포함)를 입력해주세요");
-            return -1;
+        // 음수인지 체크
+        if (num1 < 0 || num2 < 0) {
+            System.out.println("0 이상의 숫자를 입력해주세요");
+            return null; // 에러 처리
         }
 
         switch (operator) {
@@ -41,37 +48,50 @@ public class ArithmeticCalculator {
                 result = num1 * num2;
                 break;
             case DIVIDE:
-                if (num2 == 0) {
-                    System.out.println("나눗셈 연산에서 분모(두번째 정수)에 0이 입력될 수 없습니다.");
-                    return -1;
-                } else {
-                    result = num1 / num2;
+                if (num2 == 0.0) {
+                    System.out.println("나눗셈 연산에서 분모(두 번째 숫자)에 0이 입력될 수 없습니다.");
+                    return null;
                 }
+                result = num1 / num2;
                 break;
             default:
                 System.out.println("잘못된 연산 기호입니다. (+, -, *, / 중 하나를 입력하세요)");
-                return -1;
+                return null;
         }
-        results.add(result);
-        return result;
+
+        // 결과를 T 타입으로 변환
+        T typedResult = convertToT(result);
+        if (typedResult != null) {
+            results.add(typedResult);
+        }
+        return typedResult;
     }
 
-    //getter 메서드
-    public List<Integer> getResults() {
+    private T convertToT(double value) {
+        if (type == Integer.class) {
+            return type.cast((int) value);
+        } else if (type == Double.class) {
+            return type.cast(value);
+        } else if (type == Float.class) {
+            return type.cast((float) value);
+        } else {
+            throw new UnsupportedOperationException("지원하지 않는 타입: " + type.getName());
+        }
+    }
+
+    // getter 메서드
+    public List<T> getResults() {
         return results;
     }
 
-    //setter 메서드
-    public void setResults(List<Integer> results) {
+    // setter 메서드
+    public void setResults(List<T> results) {
         this.results = results;
     }
 
-//    public void saveResult(int result){
-//        results.add(result);
-//        System.out.println("[DEBUG] 저장된 결과: " + results);
-//    }
-
     public void removeResult() {
-        results.remove(0);
+        if (!results.isEmpty()) {
+            results.remove(0);
+        }
     }
 }
