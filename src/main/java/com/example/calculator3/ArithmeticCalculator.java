@@ -11,7 +11,18 @@ public class ArithmeticCalculator {
         this.results = new ArrayList<>();
     }
 
-    public int calculate(int num1, int num2, Calculator.OperatorType operator) {
+    public enum OperatorType{
+        PLUS('+'), MINUS('-'), MULTIPLY('*'), DIVIDE('/');
+
+        private final char operator;
+        OperatorType(char operator) {this.operator = operator;}
+
+        public char getOperator() {
+            return operator;
+        }
+    }
+
+    public int calculate(int num1, int num2, ArithmeticCalculator.OperatorType operator) {
         int result = 0;
 
         if (num1 <0 || num2<0){
@@ -41,7 +52,6 @@ public class ArithmeticCalculator {
                 System.out.println("잘못된 연산 기호입니다. (+, -, *, / 중 하나를 입력하세요)");
                 return -1;
         }
-
         results.add(result);
         return result;
     }
@@ -55,6 +65,11 @@ public class ArithmeticCalculator {
     public void setResults(List<Integer> results) {
         this.results = results;
     }
+
+//    public void saveResult(int result){
+//        results.add(result);
+//        System.out.println("[DEBUG] 저장된 결과: " + results);
+//    }
 
     public void removeResult() {
         results.remove(0);
