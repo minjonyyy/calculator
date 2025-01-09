@@ -75,7 +75,8 @@ public class ArithmeticCalculator<T extends Number> {
         } else if (type == Float.class) {
             return type.cast((float) value);
         } else {
-            throw new UnsupportedOperationException("지원하지 않는 타입: " + type.getName());
+            System.out.println("지원하지 않는 타입입니다.");
+            return null;
         }
     }
 
