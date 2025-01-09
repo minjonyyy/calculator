@@ -1,34 +1,20 @@
 package com.example.calculator3;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArithmeticCalculator<T extends Number> {
 
     private List<T> results;
-    private final Class<T> type;
+    private final ConvertType<T> converter;
 
-    // 생성자를 통해 타입 정보를 전달받음
     public ArithmeticCalculator(Class<T> type) {
         this.results = new ArrayList<>();
-        this.type = type;
+        this.converter = new ConvertType<>(type);
     }
 
-    public enum OperatorType {
-        PLUS('+'), MINUS('-'), MULTIPLY('*'), DIVIDE('/');
-
-        private final char operator;
-
-        OperatorType(char operator) {
-            this.operator = operator;
-        }
-
-        public char getOperator() {
-            return operator;
-        }
-    }
-
-    public T calculate(double num1, double num2, OperatorType operator) {
+    public T calculate(double num1, double num2, Operator.OperatorType operator) {
         double result;
 
         // 음수인지 체크
@@ -60,24 +46,11 @@ public class ArithmeticCalculator<T extends Number> {
         }
 
         // 결과를 T 타입으로 변환
-        T typedResult = convertToT(result);
+        T typedResult = converter.convertToT(result);
         if (typedResult != null) {
             results.add(typedResult);
         }
         return typedResult;
-    }
-
-    private T convertToT(double value) {
-        if (type == Integer.class) {
-            return type.cast((int) value);
-        } else if (type == Double.class) {
-            return type.cast(value);
-        } else if (type == Float.class) {
-            return type.cast((float) value);
-        } else {
-            System.out.println("지원하지 않는 타입입니다.");
-            return null;
-        }
     }
 
     // getter 메서드
