@@ -1,5 +1,7 @@
 package com.example.calculator3;
 
+// 연산자를 enum 타입으로 구현한 Operator 클래스
+
 public class Operator {
 
     public enum OperatorType {

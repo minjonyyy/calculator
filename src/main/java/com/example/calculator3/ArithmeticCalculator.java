@@ -1,8 +1,9 @@
 package com.example.calculator3;
 
-
 import java.util.ArrayList;
 import java.util.List;
+
+// 사용자가 입력한 값으로 실제 연산이 진행되는 ArithmeticCalculator
 
 public class ArithmeticCalculator<T extends Number> {
 

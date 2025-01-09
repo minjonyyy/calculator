@@ -3,6 +3,8 @@ package com.example.calculator3;
 import java.util.Objects;
 import java.util.Scanner;
 
+// 사용자가 값을 입력하고, 계산된 결과가 출력되는 App
+
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
