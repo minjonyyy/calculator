@@ -19,7 +19,7 @@ public class App {
         ArithmeticCalculator<?> arithmeticCalculator = ConvertType.createCalculatorByType(typeInput);
 
         do {
-            System.out.println("-----------------------");
+            System.out.println("---------"+typeInput+"형 계산기----------");
             System.out.print("첫 번째 숫자를 입력하세요: ");
             double num1 = sc.nextDouble();
             System.out.print("두 번째 숫자를 입력하세요: ");
@@ -39,7 +39,10 @@ public class App {
             Number result = arithmeticCalculator.calculate(num1, num2, operator);
 
             if (result != null) {
-                System.out.println("계산 결과: " + num1 + " " + op + " " + num2 + " = " + result);
+                String formattedNum1 = formatNumber(num1, typeInput);
+                String formattedNum2 = formatNumber(num2, typeInput);
+
+                System.out.println("계산 결과: " + formattedNum1 + " " + op + " " + formattedNum2 + " = " + result);
             }
 
             if (!arithmeticCalculator.getResults().isEmpty()) {
@@ -59,6 +62,17 @@ public class App {
             stop = sc.nextLine().toLowerCase();
 
         } while (!stop.equals("exit"));
+    }
+
+    public static String formatNumber(double number, String type) {
+        switch (type) {
+            case "integer":
+                return String.format("%d", (int) number);
+            case "float":
+                return String.format("%f", (float) number);
+            default:
+                return String.format("%f", number);
+        }
     }
 
 
