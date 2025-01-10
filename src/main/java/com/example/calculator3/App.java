@@ -64,6 +64,7 @@ public class App {
         } while (!stop.equals("exit"));
     }
 
+    // 계산 결과 출력 시에도 지정된 타입으로 출력하기 위한 형변환 메서드
     public static String formatNumber(double number, String type) {
         switch (type) {
             case "integer":
