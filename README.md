@@ -123,7 +123,7 @@
                 yield null;
             }
         };
-    }
+     }
      ```
 * `convertToT` 메서드
    * 기본적으로 double타입으로 연산되는 결과를 사용자가 지정한 타입에 맞게 변환해준다.
@@ -139,8 +139,9 @@
             System.out.println("지원하지 않는 타입입니다.");
             return null;
         }
-    }
+     }
      ```
+     
 * double로 연산하는 이유에 대해서는 블로그 참고<br>
   [[JAVA] 계산기 과제 트러블 슈팅](https://velog.io/@minjonyyy/JAVA-%EA%B3%84%EC%82%B0%EA%B8%B0-%EA%B3%BC%EC%A0%9C-%ED%8A%B8%EB%9F%AC%EB%B8%94-%EC%8A%88%ED%8C%85)
   
