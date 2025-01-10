@@ -21,7 +21,7 @@ public class ArithmeticCalculator<T extends Number> {
         // 음수인지 체크
         if (num1 < 0 || num2 < 0) {
             System.out.println("0 이상의 숫자를 입력해주세요");
-            return null; // 에러 처리
+            return null;
         }
 
         switch (operator) {

@@ -14,7 +14,7 @@ public class App {
 
         // 계산기에 사용할 타입 입력 받기
         System.out.print("계산기에 사용할 타입을 입력하세요 (Integer, Float, Double): ");
-        String typeInput = sc.nextLine().toLowerCase();
+        String typeInput = sc.nextLine().toLowerCase(); //대소문자 상관없이 입력받음
 
         ArithmeticCalculator<?> arithmeticCalculator = ConvertType.createCalculatorByType(typeInput);
 
@@ -24,7 +24,7 @@ public class App {
             double num1 = sc.nextDouble();
             System.out.print("두 번째 숫자를 입력하세요: ");
             double num2 = sc.nextDouble();
-            sc.nextLine();
+            sc.nextLine(); //입력 버퍼 지우기
 
             System.out.print("사칙연산 기호를 입력하세요: ");
             char op = sc.next().charAt(0);
@@ -39,6 +39,7 @@ public class App {
             Number result = arithmeticCalculator.calculate(num1, num2, operator);
 
             if (result != null) {
+                //연산 중 num1과 num2가 double 형식으로 계산되었기 때문에 지정된 타입으로 변경해주는 과정
                 String formattedNum1 = formatNumber(num1, typeInput);
                 String formattedNum2 = formatNumber(num2, typeInput);
 
